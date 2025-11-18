@@ -1,10 +1,10 @@
-// Script principal — cálculos, atualização automática, PDF e dark mode
+
 (function(){
-  // Helpers
+ 
   const $ = (id) => document.getElementById(id);
   const formatMoney = (v) => Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
 
-  // Elements
+ 
   const valorEl = $('valorVenda');
   const itensEl = $('itens');
   const irpfEl = $('irpf');
@@ -20,7 +20,7 @@
   const downloadPdfBtn = $('downloadPdfBtn');
   const darkToggle = $('darkModeToggle');
 
-  // Calculate and render
+  
   function calcular() {
     const valor = parseFloat(valorEl.value) || 0;
     const irpf = parseFloat(irpfEl.value) || 0;
@@ -104,10 +104,9 @@
       </div>
     `;
 
-    // show container
     notaContainer.style.display = 'block';
 
-    // attach copy json
+
     const copyBtn = document.getElementById('copyBtn');
     copyBtn.addEventListener('click', () => {
       const payload = {
@@ -133,7 +132,7 @@
     });
   }
 
-  // Events
+ 
   function updateAndRenderPreview() {
     const data = calcular();
     renderNota(data);
@@ -144,7 +143,7 @@
     renderNota(data);
   });
 
-  // Auto-calc while typing (inputs with class 'imposto' and valor)
+ 
   ['input','change'].forEach(evt => {
     valorEl.addEventListener(evt, () => {
       const v = parseFloat(valorEl.value) || 0;
@@ -173,13 +172,13 @@
     notaContainer.style.display = 'none';
   });
 
-  // PDF generation using jsPDF
+ 
   downloadPdfBtn.addEventListener('click', async () => {
     const { jsPDF } = window.jspdf;
     const data = calcular();
-    // ensure nota is rendered
+  
     renderNota(data);
-    // create simple PDF
+
     const doc = new jsPDF({unit:'pt', format:'a4'});
     const margin = 40;
     const lines = [];
@@ -202,7 +201,7 @@
     lines.push('INSS ('+data.inss+'%): R$ ' + formatMoney(data.calcINSS));
     lines.push('ISSQN ('+data.iss+'%): R$ ' + formatMoney(data.calcISS));
 
-    // write lines to PDF with simple wrapping
+  
     let y = margin;
     const maxWidth = doc.internal.pageSize.getWidth() - margin*2;
     doc.setFontSize(12);
@@ -222,7 +221,7 @@
     doc.save(filename);
   });
 
-  // Dark mode: respect system preference and toggle
+
   function applyTheme(theme){
     if(theme === 'dark'){
       document.documentElement.setAttribute('data-theme','dark');
@@ -233,7 +232,6 @@
     }
   }
 
-  // initial
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(prefersDark ? 'dark' : 'light');
 
@@ -241,7 +239,7 @@
     applyTheme(e.target.checked ? 'dark' : 'light');
   });
 
-  // expose calculate for debugging
+
   window.nfse = {calcular, renderNota};
 
 })();
