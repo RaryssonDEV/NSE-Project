@@ -1,0 +1,25 @@
+:root{
+  --bg:#f8f9fa;
+  --card:#ffffff;
+  --text:#212529;
+  --muted:#6c757d;
+}
+[data-theme="dark"]{
+  --bg:#0d1117;
+  --card:#0b1220;
+  --text:#e6eef8;
+  --muted:#9aa4b2;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+.card{
+  background:var(--card);
+}
+.navbar, footer{
+  background:var(--card);
+}
+small{color:var(--muted);}
+#notaFiscal h2{margin-top:0;}
+.table-impostos td, .table-impostos th {vertical-align: middle;}
