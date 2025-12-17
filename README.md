@@ -11,7 +11,7 @@ Projeto gerador de Nota Fiscal de Serviço (NFS-e) criado para o exercício prá
 
 ## Observações
 - As alíquotas padrões são apenas sugestão. Confirme com um contador.
-- PDF gerado tem layout básico — pode ser melhorado com templates HTML->PDF se necessário.
+- PDF gerado tem layout básico e pode ser melhorado com templates HTML->PDF se necessário.
 
 ## Contato
 Desenvolvido por **RaryssonDEV**.
